@@ -128,9 +128,6 @@ function exportChainToEaselPoints(chainContext) {
         }
     }
     var lines = [];
-    if (chainContext.endless) {
-        addLine(chainContext.links.length - 1);
-    }
     for (var i = 0; i < chainContext.links.length; i++) {
         addLine(i);
     }
@@ -154,10 +151,6 @@ function exportChainToEaselPoints(chainContext) {
     var last = toEaselPoint(curr.end);
     if (curr.controls) {
         last.lh = toEaselPoint(curr.controls[1]);
-    }
-    if (chainContext.endless) {
-        last.x = result[0].x;
-        last.y = result[0].y;
     }
     result.push(last);
     return result;
