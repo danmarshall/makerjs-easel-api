@@ -1,0 +1,34 @@
+{
+  "name": "makerjs-easel-api",
+  "version": "1.0.0",
+  "description": "Integration between Maker.js and Inventables Easel Api 2.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "browserify": "browserify -r ./index.js:makerjs-easel-api -x makerjs -o ./browser.index.js",
+    "build": "npm run compile && npm run browserify",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danmarshall/makerjs-easel-api.git"
+  },
+  "keywords": [
+    "makerjs",
+    "easel",
+    "inventables",
+    "cad"
+  ],
+  "author": "Dan Marshall",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/danmarshall/makerjs-easel-api/issues"
+  },
+  "homepage": "https://github.com/danmarshall/makerjs-easel-api#readme",
+  "dependencies": {
+    "makerjs": "^0.9.53"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0"
+  }
+}
