@@ -1,6 +1,6 @@
 {
   "name": "makerjs-easel-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Integration between Maker.js and Inventables Easel Api 2.0",
   "main": "index.js",
   "scripts": {
