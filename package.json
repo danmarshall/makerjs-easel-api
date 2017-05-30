@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
-    "browserify": "browserify -r ./index.js:makerjs-easel-api -x makerjs -o ./browser.index.js",
+    "browserify": "browserify -r ./index.js:makerjs-easel-api -x makerjs -o ./browser.makerjs-easel-api.js",
     "build": "npm run compile && npm run browserify",
     "test": "node test.js"
   },
