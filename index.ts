@@ -45,24 +45,37 @@ export interface EaselShape {
     rotation: number; // Amount of counter-clockwise rotation in radians    
 }
 
+export interface EaselRectangle extends EaselShape {
+    type: 'rectangle';
+}
+
+export interface EaselEllipse extends EaselShape {
+    type: 'ellipse';
+}
+
 export interface EaselLine extends EaselShape {
+    type: 'line';
     point1: EaselPoint;
     point2: EaselPoint;
 }
 
 export interface EaselPolyline extends EaselShape {
+    type: 'polyline';
     points: EaselPoint[];
 }
 
 export interface EaselPolygon extends EaselShape {
+    type: 'polygon';
     points: EaselPoint[];
 }
 
 export interface EaselPath extends EaselShape {
+    type: 'path';
     points: EaselPoint[][];
 }
 
 export interface EaselText extends EaselShape {
+    type: 'text';
     font: string;
     text: string;
 }
@@ -107,12 +120,14 @@ export class EaselPathModel implements makerjs.IModel {
     }
 }
 
-export function importEaselShape(shape: EaselPath | EaselPolygon | EaselPolyline) {
+export function importEaselShape(shape: EaselRectangle | EaselEllipse | EaselPath | EaselPolygon | EaselPolyline) {
     var model: makerjs.IModel;
 
     //convert Easel objects to Maker.js models
     if (shape.type == 'rectangle') {
         model = new makerjs.models.Rectangle(shape.width, shape.height);
+    } else if (shape.type == 'ellipse') {
+        model = new makerjs.models.Ellipse(shape.width / 2, shape.height / 2);
     } else {
 
         model = { models: {} };
@@ -246,4 +261,14 @@ export function exportChainToEaselPoints(chainContext: makerjs.IChain): EaselPat
     result.push(last);
 
     return result;
+}
+
+export function exportModelToEaselPointArray(model: makerjs.IModel) {
+    var allPoints = [];
+    makerjs.model.findChains(model, function (chains, loose, layer) {
+        chains.forEach(function (chain) {
+            allPoints.push(exportChainToEaselPoints(chain));
+        });
+    });
+    return allPoints;
 }

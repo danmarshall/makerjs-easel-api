@@ -18,20 +18,31 @@ export interface EaselShape {
     height: number;
     rotation: number;
 }
+export interface EaselRectangle extends EaselShape {
+    type: 'rectangle';
+}
+export interface EaselEllipse extends EaselShape {
+    type: 'ellipse';
+}
 export interface EaselLine extends EaselShape {
+    type: 'line';
     point1: EaselPoint;
     point2: EaselPoint;
 }
 export interface EaselPolyline extends EaselShape {
+    type: 'polyline';
     points: EaselPoint[];
 }
 export interface EaselPolygon extends EaselShape {
+    type: 'polygon';
     points: EaselPoint[];
 }
 export interface EaselPath extends EaselShape {
+    type: 'path';
     points: EaselPoint[][];
 }
 export interface EaselText extends EaselShape {
+    type: 'text';
     font: string;
     text: string;
 }
@@ -42,7 +53,7 @@ export declare class EaselPathModel implements makerjs.IModel {
     paths: makerjs.IPathMap;
     constructor(points: EaselPathPoint[]);
 }
-export declare function importEaselShape(shape: EaselPath | EaselPolygon | EaselPolyline): makerjs.IModel;
+export declare function importEaselShape(shape: EaselRectangle | EaselEllipse | EaselPath | EaselPolygon | EaselPolyline): makerjs.IModel;
 /**
  * Get key points (a minimal a number of points) along a chain of paths.
  *
@@ -51,3 +62,4 @@ export declare function importEaselShape(shape: EaselPath | EaselPolygon | Easel
  * @returns Array of points which are on the chain.
  */
 export declare function exportChainToEaselPoints(chainContext: makerjs.IChain): EaselPathPoint[];
+export declare function exportModelToEaselPointArray(model: makerjs.IModel): any[];

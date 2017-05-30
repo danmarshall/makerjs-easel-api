@@ -69,6 +69,9 @@ function importEaselShape(shape) {
     if (shape.type == 'rectangle') {
         model = new makerjs.models.Rectangle(shape.width, shape.height);
     }
+    else if (shape.type == 'ellipse') {
+        model = new makerjs.models.Ellipse(shape.width / 2, shape.height / 2);
+    }
     else {
         model = { models: {} };
         var pointsArray;
@@ -178,5 +181,15 @@ function exportChainToEaselPoints(chainContext) {
     return result;
 }
 exports.exportChainToEaselPoints = exportChainToEaselPoints;
+function exportModelToEaselPointArray(model) {
+    var allPoints = [];
+    makerjs.model.findChains(model, function (chains, loose, layer) {
+        chains.forEach(function (chain) {
+            allPoints.push(exportChainToEaselPoints(chain));
+        });
+    });
+    return allPoints;
+}
+exports.exportModelToEaselPointArray = exportModelToEaselPointArray;
 
 },{"makerjs":"makerjs"}]},{},[]);
